@@ -66,7 +66,7 @@ Browser.prototype.initUI = function(holder, genomePanel) {
 
     var locField = makeElement('input', '', {className: 'loc-field'});
     b.makeTooltip(locField, 'Enter a genomic location or gene name');
-    var locStatusField = makeElement('p', '', {className: 'loc-status'});
+    var locStatusField = makeElement('p', '', {className: 'loc-status col-2'});
 
     var zoomInBtn = makeElement('a', [makeElement('i', null, {className: 'fa fa-search-plus'})], {className: 'btn'});
     var zoomSlider = new makeZoomSlider({width: b.zoomSliderWidth});
@@ -111,20 +111,23 @@ Browser.prototype.initUI = function(holder, genomePanel) {
                 mb[x].classList.remove('active');
         }
     }
+
     if (!this.noLeapButtons)
         toolbar.appendChild(leapLeftButton);
-    
+
     if (!this.noTitle) {
         toolbar.appendChild(makeElement('div', makeElement('h4', title, {}, {margin: '0px'}), {className: 'btn-group title'}));
     }
+
     if (!this.noLocationField)
         toolbar.appendChild(makeElement('div', [locField, locStatusField], {className: 'btn-group loc-group'}));
+
     if (!this.noClearHighlightsButton)
         toolbar.appendChild(clearHighlightsButton);
 
     if (!this.noZoomSlider) {
         toolbar.appendChild(makeElement('div', [zoomInBtn,
-                                                makeElement('span', zoomSlider, {className: 'btn'}),
+                                                makeElement('span', zoomSlider, {className: 'btn ml'}),
                                                 zoomOutBtn], {className: 'btn-group'}));
     }
 

@@ -57,7 +57,7 @@ Browser.prototype.initUI = function(holder, genomePanel) {
     }
 
     holder.classList.add('dalliance');
-    var toolbar = b.toolbar = makeElement('div', null, {className: 'btn-toolbar toolbar'});
+    var toolbar = b.toolbar = makeElement('div', null, {className: 'btn-toolbar toolbar row'});
 
     var title = b.coordSystem.speciesName + ' ' + b.nameForCoordSystem(b.coordSystem);
     if (this.setDocumentTitle) {
@@ -86,10 +86,10 @@ Browser.prototype.initUI = function(holder, genomePanel) {
     var tierEditButton = makeElement('a', [makeElement('i', null, {className: 'fa fa-road'})], {className: 'btn'});
     b.makeTooltip(tierEditButton, 'Configure currently selected track(s) (E)')
 
-    var leapLeftButton = makeElement('a', [makeElement('i', null, {className: 'fa fa-angle-left'})], {className: 'btn'}, {width: '5px'});
-    var leapRightButton = makeElement('a', [makeElement('i', null, {className: 'fa fa-angle-right'})], {className: 'btn pull-right'}, {width: '5px'});
+    var leapLeftButton = makeElement('a', [makeElement('i', null, {className: 'fa fa-angle-left'})], {className: 'btn ml-3'}, {width: '5px'});
+    var leapRightButton = makeElement('a', [makeElement('i', null, {className: 'fa fa-angle-right'})], {className: 'btn pull-right mr-3'}, {width: '5px'});
 
-    var modeButtons = makeElement('div', null, {className: 'btn-group pull-right'});
+    var modeButtons = makeElement('div', null, {className: 'btn-group pull-right ml-auto'});
     if (!this.noTrackAdder)
         modeButtons.appendChild(addTrackBtn);
     if (!this.noTrackEditor)
@@ -111,15 +111,9 @@ Browser.prototype.initUI = function(holder, genomePanel) {
                 mb[x].classList.remove('active');
         }
     }
-
-    if (!this.noLeapButtons)
-        toolbar.appendChild(leapRightButton);
-
-    if (modeButtons.firstChild)
-        toolbar.appendChild(modeButtons);
-    
     if (!this.noLeapButtons)
         toolbar.appendChild(leapLeftButton);
+    
     if (!this.noTitle) {
         toolbar.appendChild(makeElement('div', makeElement('h4', title, {}, {margin: '0px'}), {className: 'btn-group title'}));
     }
@@ -133,6 +127,12 @@ Browser.prototype.initUI = function(holder, genomePanel) {
                                                 makeElement('span', zoomSlider, {className: 'btn'}),
                                                 zoomOutBtn], {className: 'btn-group'}));
     }
+
+    if (modeButtons.firstChild)
+        toolbar.appendChild(modeButtons);
+
+    if (!this.noLeapButtons)
+        toolbar.appendChild(leapRightButton);
     
     if (this.toolbarBelow) {
         holder.appendChild(genomePanel);
